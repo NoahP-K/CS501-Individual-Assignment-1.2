@@ -54,7 +54,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun MakeButton(observer: MutableState<Boolean>, modifier: Modifier = Modifier) {
-    Button(onClick = { observer.value = true }, modifier = modifier)
+    //The button will set the given mutable state to its opposite when pressed.
+    Button(onClick = { observer.value = !observer.value }, modifier = modifier)
     {
         Text("Press me!")
     }
@@ -63,8 +64,8 @@ fun MakeButton(observer: MutableState<Boolean>, modifier: Modifier = Modifier) {
 @Composable
 fun ButtonPress(modifier: Modifier = Modifier) {
     //This function makes the button and the mutable state boolean that it changes.
-    //Then it checks the value of the mutable state and creates the text if needed.
-    var observer = remember { mutableStateOf(false) }
+    //Then it checks the value of the mutable state and creates the text if it is true.
+    val observer = remember { mutableStateOf(false) }
     MakeButton(observer, modifier)
     if (observer.value) {
         Greeting("Android")
